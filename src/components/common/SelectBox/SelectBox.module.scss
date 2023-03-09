@@ -1,0 +1,16 @@
+@use "styles/" as *;
+
+.container {
+	.label {
+		font-size: 0.8rem;
+		text-transform: uppercase;
+		margin-bottom: 0.8rem;
+	}
+	.select {
+		width: 100%;
+		font-size: 1.5rem;
+		padding: 0.5rem 1rem;
+		border: 1px solid $grey;
+		border-radius: 4px;
+	}
+}

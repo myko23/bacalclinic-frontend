@@ -1,0 +1,20 @@
+@use "styles/" as *;
+
+.dischargeCheckBox {
+	align-self: flex-end;
+	transform: translateY(-0.4rem);
+}
+
+.hmoBtn {
+	align-self: center;
+	transform: translateY(0.8rem);
+	width: 8rem;
+}
+.editedInput {
+	color: yellowgreen;
+	input,
+	textarea,
+	p {
+		color: yellowgreen;
+	}
+}

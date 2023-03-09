@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import Login from "components/containers/Login/Login";
+import MainView from "components/containers/MainView/MainView";
+import API from "lib/configs/axios";
+import { useState } from "react";
+import { useQuery } from "react-query";
+import { ToastContainer } from "react-toastify";
+import styles from "./App.module.scss";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	useQuery(["patients"], async () => {
+		const response = await API.get("/patients");
+		return response.data;
+	});
+	useQuery(["records"], async () => {
+		const response = await API.get("/records");
+		return response.data;
+	});
+
+	const [login, setLogin] = useState(true);
+	return (
+		<>
+			<div className={styles.container}>{login ? <MainView /> : <Login />}</div>
+			<ToastContainer hideProgressBar />
+		</>
+	);
 }
 
 export default App;

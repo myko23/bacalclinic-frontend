@@ -1,0 +1,19 @@
+@use "styles/" as *;
+
+.container {
+	@include displayFlex("center");
+	@include fitBox("screen");
+
+	.loginBox {
+		@include objSize(60%, 20rem);
+		@include displayFlex("center", 2rem, column);
+		.inputContainer {
+			@include displayFlex("flex", 1rem, column);
+			width: 100%;
+		}
+
+		.loginBtn {
+			width: 100%;
+		}
+	}
+}

@@ -1,0 +1,21 @@
+@use "styles/" as *;
+
+.container {
+	@include objSize(10rem, 30rem, 0.5rem);
+	@include displayFlex("flex", 0, column);
+	background-color: white;
+	z-index: 1;
+	padding: 1rem;
+
+	.buttonContainer {
+		margin-top: auto;
+		@include displayFlex("flex", 1rem);
+		.cancelBtn {
+			background-color: $button-red;
+
+			&:hover {
+				background-color: lighten($button-red, 10%);
+			}
+		}
+	}
+}

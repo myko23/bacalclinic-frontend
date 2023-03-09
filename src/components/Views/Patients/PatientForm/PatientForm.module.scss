@@ -1,0 +1,9 @@
+@use "styles/" as *;
+
+.editedInput {
+	color: yellowgreen;
+	input,
+	p {
+		color: yellowgreen;
+	}
+}

@@ -1,0 +1,6 @@
+@use "styles/" as *;
+
+.container {
+	@include displayFlex("flex", 2rem, column);
+	width: 100%;
+}

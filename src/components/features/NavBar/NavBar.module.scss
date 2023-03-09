@@ -1,0 +1,24 @@
+@use "styles/" as *;
+
+.container {
+	@include objSize(3rem, 100%);
+	@include displayFlex("flex");
+	align-items: center;
+	padding: 0 2rem;
+	border-bottom: 1px solid $grey;
+
+	.navContainer {
+		@include displayFlex("flex", 0.8rem);
+		margin-left: 4rem;
+		.navItem {
+			letter-spacing: -1px;
+			cursor: pointer;
+			padding: 0.2rem 0.5rem;
+			border-radius: 1rem;
+
+			&:hover {
+				background-color: $grey;
+			}
+		}
+	}
+}

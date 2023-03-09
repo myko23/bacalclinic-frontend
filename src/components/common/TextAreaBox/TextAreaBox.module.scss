@@ -1,0 +1,37 @@
+@use "styles/" as *;
+
+.container {
+	.labelContainer {
+		@include displayFlex("flex");
+		margin-bottom: 0.8rem;
+
+		.label {
+			font-size: 0.8rem;
+			text-transform: uppercase;
+		}
+		.errorMessage {
+			font-size: 0.8rem;
+			text-transform: uppercase;
+			color: red;
+			margin-left: auto;
+			white-space: nowrap;
+		}
+	}
+	.input {
+		width: 100%;
+		font-size: 1.5rem;
+		padding: 0.5rem 1rem;
+		border: 1px solid $grey;
+		border-radius: 4px;
+		height: 6rem;
+		resize: none;
+	}
+}
+
+.disabled {
+	.input {
+		border: none;
+		user-select: none;
+		background-color: white;
+	}
+}

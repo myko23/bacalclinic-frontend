@@ -1,0 +1,16 @@
+@use "styles/" as *;
+
+.container {
+	padding-bottom: 2rem;
+	.header {
+		font-size: 1.2rem;
+		text-transform: uppercase;
+	}
+	.formContent {
+		margin-top: 1rem;
+		@include displayFlex("flex", 1rem, column);
+	}
+}
+.borderBottom {
+	border-bottom: 1px solid $grey;
+}

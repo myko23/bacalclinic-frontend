@@ -1,0 +1,53 @@
+@use "styles/" as *;
+
+.container {
+	padding: 0 4rem;
+	padding-bottom: 5rem;
+	.headerContainer {
+		@include displayFlex();
+		align-items: center;
+		justify-content: space-between;
+		padding: 1rem 0;
+		border-bottom: 1px solid $grey;
+		.recordsContainer {
+			@include displayFlex("center", 1rem);
+			.recordsItem {
+				@include objSize(2rem, 10rem, 4px);
+				@include displayFlex("center");
+				border: 1px solid $grey;
+				cursor: pointer;
+			}
+			.recordsSelected {
+				background-color: $grey;
+			}
+		}
+	}
+	.sortContainer {
+		@include displayFlex();
+		align-items: center;
+		padding: 1rem 0;
+		border-bottom: 1px solid $grey;
+
+		.sortBy {
+			margin-left: auto;
+			width: 20rem;
+		}
+		.sort {
+			margin-left: 1rem;
+		}
+	}
+}
+
+.bottomContainer {
+	@include displayFlex();
+	align-items: center;
+	padding: 0 4rem;
+
+	.buttonContainer {
+		@include displayFlex("flex", 1rem);
+		margin-left: auto;
+		.button {
+			width: 10rem;
+		}
+	}
+}

@@ -1,0 +1,9 @@
+@use "styles/" as *;
+
+.container {
+	@include objSize(5rem, 100%);
+	position: fixed;
+	bottom: 0;
+	border-top: 1px solid $grey;
+	background-color: white;
+}

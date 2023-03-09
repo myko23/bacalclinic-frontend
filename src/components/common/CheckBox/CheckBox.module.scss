@@ -1,0 +1,16 @@
+@use "styles/" as *;
+
+.container {
+	@include displayFlex("flex", 1rem);
+	align-items: center;
+	.checkBoxContainer {
+		@include displayFlex("center");
+		@include objSize(2rem, 2rem, 4px);
+		border: 1px solid $grey;
+		cursor: pointer;
+		.checked {
+			@include objSize(1rem, 1rem, 2px);
+			background-color: $button-blue;
+		}
+	}
+}

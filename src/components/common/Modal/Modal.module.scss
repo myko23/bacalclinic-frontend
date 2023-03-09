@@ -1,0 +1,22 @@
+@use "styles/" as *;
+
+.container {
+	@include fitBox("screen");
+	@include displayFlex("center");
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	right: 0;
+
+	.overlay {
+		@include fitBox();
+		position: absolute;
+		top: 0;
+		background-color: black;
+		opacity: 0.5;
+	}
+
+	.modalContent {
+		z-index: 1;
+	}
+}

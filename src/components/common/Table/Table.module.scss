@@ -1,0 +1,60 @@
+@use "styles/" as *;
+
+.table {
+	user-select: none;
+
+	.headerContainer {
+		@include displayFlex("flex");
+		position: sticky;
+		top: 0;
+		background-color: white;
+		@include objSize(100%, 100%);
+		padding-left: 1rem;
+		padding-top: 0.8rem;
+		margin-bottom: 0.5rem;
+
+		.columnHeader {
+			color: black;
+			white-space: nowrap;
+			overflow-x: auto;
+			font-size: $header-4;
+			height: 100%;
+		}
+	}
+	.dataContainer {
+		@include displayFlex("flex", 0, column);
+
+		.rowData {
+			@include displayFlex();
+			@include objSize(3.5rem, 100%);
+			align-items: center;
+			padding-left: 1rem;
+			font-size: $header-2;
+			background-color: white;
+			border-radius: 1rem;
+
+			&:hover {
+				background: $grey;
+				color: white;
+				cursor: pointer;
+			}
+
+			.rowItem {
+				white-space: nowrap;
+				overflow-x: auto;
+				@include hiddenScroll();
+			}
+		}
+		.rowSelected {
+			background-color: $selected-blue;
+			color: white;
+		}
+	}
+	.emptyMessage {
+		margin-top: 7rem;
+		color: grey;
+		font-size: $header-2;
+		width: 100%;
+		text-align: center;
+	}
+}
