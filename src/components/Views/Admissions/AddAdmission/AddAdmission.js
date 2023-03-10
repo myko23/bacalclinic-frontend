@@ -47,6 +47,7 @@ const AddAdmission = () => {
 		} else {
 			formik.setFieldValue("datedischarged", DateTime.now().toFormat("MM-dd-yyyy"));
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [dischargeCheck]);
 
 	return (
