@@ -4,7 +4,7 @@ import DateBox from "components/common/DateBox/DateBox";
 import FormGroup from "components/common/Forms/FormGroup/FormGroup";
 import FormRow from "components/common/Forms/FormRow/FormRow";
 import FormSection from "components/common/Forms/FormSection/FormSection";
-import HMOModal from "components/common/HMOModal/HMOModal";
+import HMOModal from "components/features/HMOModal/HMOModal";
 import InputBox from "components/common/InputBox/InputBox";
 import TextAreaBox from "components/common/TextAreaBox/TextAreaBox";
 import { getDateDiff } from "lib/utils/getDateDiff";
@@ -13,11 +13,13 @@ import React, { useEffect, useState } from "react";
 import styles from "./AdmissionForm.module.scss";
 import cls from "classnames";
 import { checkArray } from "lib/utils/checkArray";
+import AssessmentModal from "components/features/AssessmentModal/AssessmentModal";
 
 const AdmissionForm = ({ formik, dischargeBox, editAdmissionValues, editFormat = false }) => {
 	const { dischargeCheck, setDischargeCheck } = dischargeBox;
 	const [hmoModal, setHmoModal] = useState(false);
 	const [duration, setDuration] = useState("0");
+	const [assessmentModal, setAssessmentModal] = useState(false);
 
 	useEffect(() => {
 		setDuration(`${getDateDiff(formik.values.datedischarged, formik.values.dateofconsult, "days")} days`);
@@ -122,6 +124,15 @@ const AdmissionForm = ({ formik, dischargeBox, editAdmissionValues, editFormat =
 								)}
 							/>
 						</FormRow>
+						<FormRow>
+							<Button
+								label="Assessment"
+								className={styles.assessmentBtn}
+								onClick={() => {
+									setAssessmentModal(true);
+								}}
+							/>
+						</FormRow>
 					</FormSection>
 					<FormSection header="Billing Details" border={false}>
 						<FormRow>
@@ -155,14 +166,14 @@ const AdmissionForm = ({ formik, dischargeBox, editAdmissionValues, editFormat =
 					</FormSection>
 				</FormGroup>
 			</div>
-			{hmoModal && (
-				<HMOModal
-					formik={formik}
-					onCancel={() => {
-						setHmoModal(false);
-					}}
-				/>
-			)}
+			<HMOModal
+				enabled={hmoModal}
+				formik={formik}
+				onCancel={() => {
+					setHmoModal(false);
+				}}
+			/>
+			<AssessmentModal enabled={assessmentModal} onCancel={() => setAssessmentModal(false)} formik={formik} />
 		</>
 	);
 };

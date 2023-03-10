@@ -14,6 +14,8 @@ import ConfirmModal from "components/common/ConfirmModal/ConfirmModal";
 import { recordsYupSchema } from "lib/schema/recordsSchema";
 import { useEditRecordsMutation } from "lib/api/recordsAPI";
 import { toast } from "react-toastify";
+import { faBedPulse } from "@fortawesome/free-solid-svg-icons";
+import Header from "components/common/Header/Header";
 
 const EditAdmission = () => {
 	const { selectedPatient, selectedAdmission } = useSelected();
@@ -66,6 +68,7 @@ const EditAdmission = () => {
 			<div className={styles.container}>
 				<div className={styles.headerContainer}>
 					<h1 className={styles.header}>{`${selectedPatient.firstname} ${selectedPatient.lastname}`}</h1>
+					<Header icon={faBedPulse}>Edit Admission</Header>
 				</div>
 				<div className={styles.formContainer}>
 					<AdmissionForm

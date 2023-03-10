@@ -26,7 +26,12 @@ const NavBar = () => {
 				>
 					Consultation
 				</p>
-				<p className={cls(styles.navItem, mainview === "generaladmission" && styles.navItemSelected)}>
+				<p
+					className={cls(styles.navItem, mainview === "generaladmission" && styles.navItemSelected)}
+					onClick={() => {
+						setMainView("generaladmission");
+					}}
+				>
 					Admission
 				</p>
 				<p

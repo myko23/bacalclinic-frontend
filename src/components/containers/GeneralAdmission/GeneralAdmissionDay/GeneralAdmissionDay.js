@@ -1,45 +1,50 @@
+import { faNotesMedical } from "@fortawesome/free-solid-svg-icons";
+import Header from "components/common/Header/Header";
 import React, { useState } from "react";
-import styles from "./GeneralAdmitted.module.scss";
+import styles from "./GeneralAdmissionDay.module.scss";
+import cls from "classnames";
 import InputBox from "components/common/InputBox/InputBox";
+import DateBox from "components/common/DateBox/DateBox";
+import { DateTime } from "luxon";
 import SelectBox from "components/common/SelectBox/SelectBox";
 import Table from "components/common/Table/Table";
 import { searchTable } from "components/common/Table/searchTable";
 import { useSelected } from "lib/hooks/useSelected";
 import { useTableConfigs } from "components/common/Table/useTableConfigs";
-import { useRecords } from "lib/hooks/useRecords";
 import { useTableSettings } from "lib/hooks/useTableSettings";
-import Header from "components/common/Header/Header";
-import { faBedPulse } from "@fortawesome/free-solid-svg-icons";
+import { useRecords } from "lib/hooks/useRecords";
+import _ from "lodash";
+import { sortFeatures } from "lib/models/sortFeatures";
+import { sortNameAdmissionHeader } from "lib/configs/selectConfigs";
 import BottomMenu from "components/common/BottomMenu/BottomMenu";
 import Button from "components/common/Button/Button";
-import SelectPatientModal from "components/features/SelectPatientModal/SelectPatientModal";
 import { useRoute } from "lib/hooks/useRoute";
-import _ from "lodash";
-import { sortNameAdmissionHeader } from "lib/configs/selectConfigs";
-import { sortFeatures } from "lib/models/sortFeatures";
 import ConfirmModal from "components/common/ConfirmModal/ConfirmModal";
-import { toast } from "react-toastify";
 import { useDeleteRecordsMutation } from "lib/api/recordsAPI";
+import { toast } from "react-toastify";
+import SelectPatientModal from "components/features/SelectPatientModal/SelectPatientModal";
 
-const GeneralAdmitted = () => {
-	const [admittedSearch, setAdmittedSearch] = useState("");
+const GeneralAdmissionDay = () => {
+	const [admissionSearch, setAdmissionSearch] = useState("");
+	const [sortDay, setSortDay] = useState(DateTime.now().toFormat("MM-dd-yyyy"));
+	const [sortItem, setSortItem] = useState("datecreated");
+	const [sortOrder, setSortOrder] = useState("asc");
 	const { selectedAdmission, setSelectedAdmission } = useSelected();
-	const { admittedAdmissionData } = useRecords();
+	const { nameAdmissionData } = useRecords();
 	const { generalAdmissionTableConfigs } = useTableSettings();
-	const [confirmPatientModal, setConfirmPatientModal] = useState();
-	const { setRecordsView, setMainView } = useRoute();
-	const [sortItem, setSortItem] = useState();
-	const [sortOrder, setSortOrder] = useState();
+	const { setMainView, setRecordsView } = useRoute();
 	const [confirmDelete, setConfirmDelete] = useState(false);
 	const deleteAdmission = useDeleteRecordsMutation();
+	const [confirmPatientModal, setConfirmPatientModal] = useState(false);
 
+	const datedConsultationData = _.filter(nameAdmissionData, (item) => item.dateofconsult === sortDay);
 	const viewButtonDisable = _.includes(
-		_.map(admittedAdmissionData, (item) => item._id),
+		_.map(datedConsultationData, (item) => item._id),
 		selectedAdmission?._id
 	);
 
 	const { tableData, tableHeaders, tableWidth } = useTableConfigs(
-		admittedAdmissionData,
+		datedConsultationData,
 		generalAdmissionTableConfigs,
 		{
 			defaultItem: "datecreated",
@@ -50,34 +55,53 @@ const GeneralAdmitted = () => {
 	return (
 		<>
 			<div className={styles.container}>
-				<Header icon={faBedPulse}>Admitted Patients</Header>
+				<div className={styles.headerContainer}>
+					<Header icon={faNotesMedical}>Daily Admissions</Header>
+					<div className={styles.navContainer}>
+						<div className={cls(styles.navItem, styles.navSelected)}>Days</div>
+						<div className={styles.navItem} onClick={() => {}}>
+							Months
+						</div>
+					</div>
+				</div>
 				<div className={styles.sortContainer}>
 					<InputBox
 						label="Search"
 						className={styles.search}
 						width="30rem"
-						value={admittedSearch}
-						onChange={(e) => setAdmittedSearch(e.target.value)}
+						value={admissionSearch}
+						onChange={(e) => setAdmissionSearch(e.target.value)}
 					/>
-
+					<DateBox
+						label="Day"
+						className={styles.sortDay}
+						width="15rem"
+						selected={DateTime.fromFormat(sortDay, "MM-dd-yyyy").toJSDate()}
+						onChange={(e) => {
+							if (e !== null) {
+								const newDate = DateTime.fromJSDate(e).toFormat("MM-dd-yyyy");
+								setSortDay(newDate);
+							}
+						}}
+					/>
 					<SelectBox
 						label="Sort By"
-						className={styles.sortBy}
 						options={sortNameAdmissionHeader}
+						className={styles.sortBy}
 						value={sortItem}
 						onChange={(e) => setSortItem(e.target.value)}
 					/>
 					<SelectBox
 						label="Asc/ Desc"
-						className={styles.sort}
 						options={sortFeatures}
+						className={styles.sort}
 						value={sortOrder}
 						onChange={(e) => setSortOrder(e.target.value)}
 					/>
 				</div>
 				<div className={styles.tableContainer}>
 					<Table
-						data={searchTable(tableData, admittedSearch)}
+						data={searchTable(tableData, admissionSearch)}
 						dataHeaders={tableHeaders}
 						dataWidth={tableWidth}
 						rowSelected={selectedAdmission?._id} // Row Selected ID
@@ -88,23 +112,19 @@ const GeneralAdmitted = () => {
 							setMainView("records");
 							setRecordsView("editadmission");
 						}}
-						emptyTableString="No Consultation Records"
+						emptyTableString="No Admission Records"
 					/>
 				</div>
 			</div>
-			<SelectPatientModal
-				enabled={confirmPatientModal}
-				onProceed={() => {
-					setMainView("records");
-					setRecordsView("addadmission");
-				}}
-				onCancel={() => {
-					setConfirmPatientModal(false);
-				}}
-			/>
 			<BottomMenu className={styles.bottomContainer}>
 				<div className={styles.buttonContainer}>
-					<Button label="Add" className={styles.button} onClick={() => setConfirmPatientModal(true)} />
+					<Button
+						label="Add"
+						className={styles.button}
+						onClick={() => {
+							setConfirmPatientModal(true);
+						}}
+					/>
 					<Button
 						label="View"
 						className={styles.button}
@@ -116,17 +136,27 @@ const GeneralAdmitted = () => {
 					/>
 					<Button
 						label="Delete"
+						disabled={!viewButtonDisable}
 						className={styles.button}
 						onClick={() => {
 							setConfirmDelete(true);
 						}}
-						disabled={!viewButtonDisable}
 					/>
 				</div>
 			</BottomMenu>
+			<SelectPatientModal
+				enabled={confirmPatientModal}
+				onProceed={() => {
+					setMainView("records");
+					setRecordsView("addadmission");
+				}}
+				onCancel={() => {
+					setConfirmPatientModal(false);
+				}}
+			/>
 			<ConfirmModal
 				enabled={confirmDelete}
-				message={`Are you sure you want to DELETE record with ${selectedAdmission?.chiefcomplaint} from the admission records`}
+				message={`Are you sure you want to DELETE record with ${selectedAdmission?.chiefcomplaint} from the consultation records`}
 				onConfirm={async () => {
 					try {
 						await toast.promise(deleteAdmission.mutateAsync(selectedAdmission._id), {
@@ -148,4 +178,4 @@ const GeneralAdmitted = () => {
 	);
 };
 
-export default GeneralAdmitted;
+export default GeneralAdmissionDay;

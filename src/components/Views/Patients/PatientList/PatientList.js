@@ -10,7 +10,7 @@ import Table from "components/common/Table/Table";
 import { useTableConfigs } from "components/common/Table/useTableConfigs";
 import { useDeletePatientMutation } from "lib/api/patientsAPI";
 import { sortPatientHeader } from "lib/configs/selectConfigs";
-import { useTableSettings } from "lib/configs/useTableSettings";
+import { useTableSettings } from "lib/hooks/useTableSettings";
 import { useRecords } from "lib/hooks/useRecords";
 import { useRoute } from "lib/hooks/useRoute";
 import { useSelected } from "lib/hooks/useSelected";
@@ -108,7 +108,7 @@ const PatientList = () => {
 			</BottomMenu>
 			<ConfirmModal
 				enabled={confirmDelete}
-				message={`Are you sure you want to DELETE ${selectedPatient?.firstname} ${selectedPatient?.lastname} from the patient records`}
+				message={`Are you sure you want to DELETE ${selectedPatient?.firstname} ${selectedPatient?.lastname} from the patient records. This will included deleting all the pertaining records he has existing in the system.`}
 				onConfirm={async () => {
 					try {
 						await toast.promise(deletePatient.mutateAsync(selectedPatient._id), {

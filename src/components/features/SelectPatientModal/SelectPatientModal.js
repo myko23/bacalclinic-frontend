@@ -1,21 +1,26 @@
 import InputBox from "components/common/InputBox/InputBox";
 import Modal from "components/common/Modal/Modal";
 import { useRecords } from "lib/hooks/useRecords";
-import React from "react";
+import React, { useState } from "react";
 import styles from "./SelectPatientModal.module.scss";
 import cls from "classnames";
 import { useSelected } from "lib/hooks/useSelected";
-import { useRoute } from "lib/hooks/useRoute";
+
 import Button from "components/common/Button/Button";
 
 const SelectPatientModal = ({ enabled, onCancel, onProceed }) => {
 	const { patientData } = useRecords();
-	const { setMainView, setRecordsView } = useRoute();
+	const [searchPatient, setSearchPatient] = useState("");
+
 	const { selectedPatient, setSelectedPatient } = useSelected();
+	const searchPatientData = patientData.filter((item) => {
+		if (`${item.firstname} ${item.lastname}`.toLowerCase().includes(searchPatient.toLowerCase())) return item;
+		return null;
+	});
 	if (!enabled) return null;
 
 	const renderPatient = () => {
-		return patientData.map((item) => {
+		return searchPatientData.map((item) => {
 			return (
 				<div
 					onClick={() => {
@@ -23,8 +28,7 @@ const SelectPatientModal = ({ enabled, onCancel, onProceed }) => {
 					}}
 					onDoubleClick={() => {
 						onCancel();
-						setMainView("records");
-						setRecordsView("addconsultation");
+						onProceed();
 					}}
 					className={cls(styles.patientItem, item._id === selectedPatient._id && styles.patientItemSelected)}
 				>{`${item.firstname} ${item.lastname}`}</div>
@@ -36,7 +40,14 @@ const SelectPatientModal = ({ enabled, onCancel, onProceed }) => {
 			<div className={styles.container}>
 				<div className={styles.headerContainer}>
 					<h1 className={styles.header}>Patient</h1>
-					<InputBox label="Search" width="100%" />
+					<InputBox
+						label="Search"
+						width="100%"
+						value={searchPatient}
+						onChange={(e) => {
+							setSearchPatient(e.target.value);
+						}}
+					/>
 				</div>
 				<div className={styles.patientContainer}>{renderPatient()}</div>
 				<div className={styles.buttonContainer}>

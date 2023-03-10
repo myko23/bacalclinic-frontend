@@ -13,6 +13,8 @@ import { useAddRecordsMutation } from "lib/api/recordsAPI";
 import ConfirmModal from "components/common/ConfirmModal/ConfirmModal";
 import { toast } from "react-toastify";
 import { useRoute } from "lib/hooks/useRoute";
+import Header from "components/common/Header/Header";
+import { faBedPulse } from "@fortawesome/free-solid-svg-icons";
 
 const AddAdmission = () => {
 	const { selectedPatient } = useSelected();
@@ -55,7 +57,7 @@ const AddAdmission = () => {
 			<div className={styles.container}>
 				<div className={styles.headerContainer}>
 					<h1 className={styles.header}>{`${selectedPatient.firstname} ${selectedPatient.lastname}`}</h1>
-					<h2 className={styles.headerLabel}>Add Admission</h2>
+					<Header icon={faBedPulse}>Add Admission</Header>
 				</div>
 				<div className={styles.formContainer}>
 					<AdmissionForm formik={formik} dischargeBox={{ dischargeCheck, setDischargeCheck }} />

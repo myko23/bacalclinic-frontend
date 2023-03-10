@@ -15,7 +15,7 @@ import Button from "components/common/Button/Button";
 import ConfirmModal from "components/common/ConfirmModal/ConfirmModal";
 import { toast } from "react-toastify";
 import { useDeleteRecordsMutation } from "lib/api/recordsAPI";
-import { useTableSettings } from "lib/configs/useTableSettings";
+import { useTableSettings } from "lib/hooks/useTableSettings";
 
 const ConsultationList = () => {
 	const { selectedPatient, patientConsultationData, selectedConsultation, setSelectedConsultation } = useSelected();

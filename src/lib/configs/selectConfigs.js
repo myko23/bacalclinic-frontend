@@ -49,6 +49,10 @@ export const sortAdmissionHeader = [
 		label: "Remarks",
 		value: "disposition",
 	},
+	{
+		label: "Assessment",
+		value: "assessment",
+	},
 ];
 
 export const sortNameConsultationHeader = [
@@ -76,5 +80,31 @@ export const sortNameConsultationHeader = [
 	{
 		label: "Assessment",
 		value: "assessment	",
+	},
+];
+export const sortNameAdmissionHeader = [
+	{
+		label: "Default",
+		value: "datecreated",
+	},
+	{
+		label: "First Name",
+		value: "firstname",
+	},
+	{
+		label: "Last Name",
+		value: "lastname",
+	},
+	{
+		label: "Date of Admission",
+		value: "dateofconsult",
+	},
+	{
+		label: "Remarks",
+		value: "disposition",
+	},
+	{
+		label: "Assessment",
+		value: "assessment",
 	},
 ];

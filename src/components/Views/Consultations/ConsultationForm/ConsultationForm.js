@@ -12,12 +12,14 @@ import styles from "./ConsultationForm.module.scss";
 import cls from "classnames";
 import { checkArray } from "lib/utils/checkArray";
 import Button from "components/common/Button/Button";
-import HMOModal from "components/common/HMOModal/HMOModal";
+import HMOModal from "components/features/HMOModal/HMOModal";
+import AssessmentModal from "components/features/AssessmentModal/AssessmentModal";
 
 const ConsultationForm = ({ formik, editConsultationValues, editFormat = false }) => {
 	const [age, setAge] = useState("");
 	const { selectedPatient } = useSelected();
 	const [hmoModal, setHmoModal] = useState(false);
+	const [assessmentModal, setAssessmentModal] = useState(false);
 
 	useEffect(() => {
 		setAge(getDateDiff(formik.values.dateofconsult, selectedPatient.birthday) || "0");
@@ -103,6 +105,15 @@ const ConsultationForm = ({ formik, editConsultationValues, editFormat = false }
 							/>
 						</FormRow>
 						<FormRow>
+							<Button
+								label="Assessment"
+								className={styles.assessmentBtn}
+								onClick={() => {
+									setAssessmentModal(true);
+								}}
+							/>
+						</FormRow>
+						<FormRow>
 							<TextAreaBox
 								label="Plan"
 								width="100%"
@@ -144,14 +155,14 @@ const ConsultationForm = ({ formik, editConsultationValues, editFormat = false }
 					</FormSection>
 				</FormGroup>
 			</div>
-			{hmoModal && (
-				<HMOModal
-					formik={formik}
-					onCancel={() => {
-						setHmoModal(false);
-					}}
-				/>
-			)}
+			<HMOModal
+				enabled={hmoModal}
+				formik={formik}
+				onCancel={() => {
+					setHmoModal(false);
+				}}
+			/>
+			<AssessmentModal enabled={assessmentModal} onCancel={() => setAssessmentModal(false)} formik={formik} />
 		</>
 	);
 };

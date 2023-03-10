@@ -1,36 +1,28 @@
 @use "styles/" as *;
 
 .container {
-	@include objSize(30rem, 20rem, 1rem);
+	@include objSize(40rem, 40rem, 0.5rem);
 	@include displayFlex("flex", 0, column);
 	background-color: white;
-	padding: 1rem;
+	padding: 1.5rem;
 	overflow: hidden;
-
 	.headerContainer {
 		padding-bottom: 1rem;
-		.header {
-			text-align: center;
-		}
 		border-bottom: 1px solid $grey;
 	}
-	.dataContainer {
-		margin: 1rem 0;
+	.assessmentContainer {
+		@include displayFlex("flex", 0.4rem, column);
 		height: 100%;
+		margin-top: 1rem;
 		overflow-y: auto;
-
-		.dataItem {
-			font-size: 1.5rem;
-			padding: 0.5rem;
-			border-radius: 4px;
+		.assessmentItem {
+			padding: 1rem;
+			border: 1px solid $grey;
+			border-radius: 0.5rem;
 			cursor: pointer;
-
 			&:hover {
 				background-color: $grey;
 			}
 		}
-	}
-	.buttonContainer {
-		@include displayFlex("flex", 1rem);
 	}
 }

@@ -21,6 +21,7 @@ export const useDeletePatientMutation = () => {
 	const queryClient = useQueryClient();
 	return useMutation((content) => API.delete(`patients/${content}`), {
 		onSuccess: async () => {
+			await queryClient.invalidateQueries({ queryKey: ["records"] }, { cancelRefetch: true });
 			await queryClient.invalidateQueries({ queryKey: ["patients"] }, { cancelRefetch: true });
 		},
 	});

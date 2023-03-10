@@ -13,6 +13,8 @@ import ConfirmModal from "components/common/ConfirmModal/ConfirmModal";
 import { useEditRecordsMutation } from "lib/api/recordsAPI";
 import { toast } from "react-toastify";
 import { useRoute } from "lib/hooks/useRoute";
+import Header from "components/common/Header/Header";
+import { faNotesMedical } from "@fortawesome/free-solid-svg-icons";
 
 const EditConsultation = () => {
 	const { selectedPatient, selectedConsultation } = useSelected();
@@ -47,6 +49,7 @@ const EditConsultation = () => {
 			<div className={styles.container}>
 				<div className={styles.headerContainer}>
 					<h1 className={styles.header}>{`${selectedPatient.firstname} ${selectedPatient.lastname}`}</h1>
+					<Header icon={faNotesMedical}>Edit Consultation</Header>
 				</div>
 				<div className={styles.formContainer}>
 					<ConsultationForm

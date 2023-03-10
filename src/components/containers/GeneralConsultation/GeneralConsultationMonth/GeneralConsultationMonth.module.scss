@@ -4,12 +4,34 @@
 	@include fitBox();
 	padding: 1rem 4rem;
 	padding-bottom: 5rem;
+
+	.headerContainer {
+		@include displayFlex();
+		justify-content: space-between;
+		align-items: center;
+		.navContainer {
+			@include displayFlex("flex", 1rem);
+			.navItem {
+				@include objSize(2rem, 10rem, 4px);
+				@include displayFlex("center");
+				border: 1px solid $grey;
+				cursor: pointer;
+			}
+			.navSelected {
+				background-color: $grey;
+			}
+		}
+	}
+
 	.sortContainer {
 		@include displayFlex();
 		align-items: center;
 		padding: 1rem 0;
 		border-bottom: 1px solid $grey;
 
+		.sortDay {
+			margin-left: 1rem;
+		}
 		.sortBy {
 			margin-left: auto;
 			width: 20rem;

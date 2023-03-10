@@ -12,6 +12,8 @@ import { toast } from "react-toastify";
 import { useAddPatientMutation } from "lib/api/patientsAPI";
 import { useRoute } from "lib/hooks/useRoute";
 import _ from "lodash";
+import Header from "components/common/Header/Header";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 const AddPatient = () => {
 	const [confirmAdd, setConfirmAdd] = useState(false);
@@ -46,7 +48,7 @@ const AddPatient = () => {
 		<>
 			<div className={styles.container}>
 				<div className={styles.headerContainer}>
-					<h1 className={styles.header}>Add New Patient</h1>
+					<Header icon={faUser}>Add New Patient</Header>
 				</div>
 				<div className={styles.formContainer}>
 					<PatientForm formik={formik} />

@@ -10,7 +10,7 @@ import InputBox from "components/common/InputBox/InputBox";
 import Table from "components/common/Table/Table";
 import { searchTable } from "components/common/Table/searchTable";
 import { useTableConfigs } from "components/common/Table/useTableConfigs";
-import { useTableSettings } from "lib/configs/useTableSettings";
+import { useTableSettings } from "lib/hooks/useTableSettings";
 import BottomMenu from "components/common/BottomMenu/BottomMenu";
 import Button from "components/common/Button/Button";
 import { toast } from "react-toastify";
