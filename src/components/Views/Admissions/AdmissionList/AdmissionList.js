@@ -13,7 +13,6 @@ import { useTableConfigs } from "components/common/Table/useTableConfigs";
 import { useTableSettings } from "lib/configs/useTableSettings";
 import BottomMenu from "components/common/BottomMenu/BottomMenu";
 import Button from "components/common/Button/Button";
-import { useDeletePatientMutation } from "lib/api/patientsAPI";
 import { toast } from "react-toastify";
 import ConfirmModal from "components/common/ConfirmModal/ConfirmModal";
 import { useDeleteRecordsMutation } from "lib/api/recordsAPI";
@@ -85,7 +84,9 @@ const AdmissionList = () => {
 						rowClick={(item) => {
 							setSelectedAdmission(item._id);
 						}}
-						rowDoubleClick={() => {}}
+						rowDoubleClick={() => {
+							setRecordsView("editadmission");
+						}}
 						emptyTableString="No Admission Records"
 					/>
 				</div>

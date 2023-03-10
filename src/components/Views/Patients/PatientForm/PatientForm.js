@@ -64,8 +64,10 @@ const PatientForm = ({ formik, editPatientValues, editFormat = false }) => {
 							)}
 							selected={DateTime.fromFormat(formik.values.birthday, "MM-dd-yyyy").toJSDate()}
 							onChange={(e) => {
-								const newDate = DateTime.fromJSDate(e).toFormat("MM-dd-yyyy");
-								formik.setFieldValue("birthday", newDate);
+								if (e !== null) {
+									const newDate = DateTime.fromJSDate(e).toFormat("MM-dd-yyyy");
+									formik.setFieldValue("birthday", newDate);
+								}
 							}}
 							formikError={formik.errors.birthday}
 						/>

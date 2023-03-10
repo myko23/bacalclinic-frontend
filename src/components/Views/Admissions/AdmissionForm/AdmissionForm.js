@@ -33,8 +33,10 @@ const AdmissionForm = ({ formik, dischargeBox, editAdmissionValues, editFormat =
 								label="Date of Consult"
 								selected={DateTime.fromFormat(formik.values.dateofconsult, "MM-dd-yyyy").toJSDate()}
 								onChange={(e) => {
-									const newDate = DateTime.fromJSDate(e).toFormat("MM-dd-yyyy");
-									formik.setFieldValue("dateofconsult", newDate);
+									if (e !== null) {
+										const newDate = DateTime.fromJSDate(e).toFormat("MM-dd-yyyy");
+										formik.setFieldValue("dateofconsult", newDate);
+									}
 								}}
 								className={cls(
 									checkArray("dateofconsult", editAdmissionValues) && editFormat && styles.editedInput
@@ -61,8 +63,10 @@ const AdmissionForm = ({ formik, dischargeBox, editAdmissionValues, editFormat =
 												  ).toJSDate()
 										}
 										onChange={(e) => {
-											const newDate = DateTime.fromJSDate(e).toFormat("MM-dd-yyyy");
-											formik.setFieldValue("datedischarged", newDate);
+											if (e !== null) {
+												const newDate = DateTime.fromJSDate(e).toFormat("MM-dd-yyyy");
+												formik.setFieldValue("datedischarged", newDate);
+											}
 										}}
 										className={cls(
 											checkArray("datedischarged", editAdmissionValues) &&

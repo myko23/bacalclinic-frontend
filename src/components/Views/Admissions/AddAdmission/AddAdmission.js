@@ -86,7 +86,7 @@ const AddAdmission = () => {
 			</BottomMenu>
 			<ConfirmModal
 				enabled={confirmAdd}
-				message={`Are you sure you want to ADD a consult to the patient records`}
+				message={`Are you sure you want to ADD a admission to the patient records`}
 				onConfirm={async () => {
 					try {
 						await toast.promise(
@@ -96,8 +96,8 @@ const AddAdmission = () => {
 								patient_id: selectedPatient._id,
 							}),
 							{
-								pending: "Adding Consultation",
-								success: "Consultation Added",
+								pending: "Adding Admission",
+								success: "Admission Added",
 								error: "Unsuccesful Adding",
 							}
 						);

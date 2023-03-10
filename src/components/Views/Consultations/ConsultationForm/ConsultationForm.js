@@ -33,8 +33,10 @@ const ConsultationForm = ({ formik, editConsultationValues, editFormat = false }
 								label="Date of Consult"
 								selected={DateTime.fromFormat(formik.values.dateofconsult, "MM-dd-yyyy").toJSDate()}
 								onChange={(e) => {
-									const newDate = DateTime.fromJSDate(e).toFormat("MM-dd-yyyy");
-									formik.setFieldValue("dateofconsult", newDate);
+									if (e !== null) {
+										const newDate = DateTime.fromJSDate(e).toFormat("MM-dd-yyyy");
+										formik.setFieldValue("dateofconsult", newDate);
+									}
 								}}
 								className={cls(
 									checkArray("dateofconsult", editConsultationValues) &&

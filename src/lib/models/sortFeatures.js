@@ -7,8 +7,4 @@ export const sortFeatures = [
 		label: "Descending",
 		value: "desc",
 	},
-	{
-		label: "None",
-		value: "none",
-	},
 ];

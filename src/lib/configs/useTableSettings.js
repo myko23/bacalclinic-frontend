@@ -1,9 +1,12 @@
+import { useRecords } from "lib/hooks/useRecords";
 import { useSelected } from "lib/hooks/useSelected";
 import { getDateDiff } from "lib/utils/getDateDiff";
+import _ from "lodash";
 import { DateTime } from "luxon";
 
 export const useTableSettings = () => {
 	const { selectedPatient } = useSelected();
+	const { patientData } = useRecords();
 
 	const patientTableConfigs = [
 		{
@@ -63,7 +66,7 @@ export const useTableSettings = () => {
 			content: (item) => {
 				return DateTime.fromFormat(item.dateofconsult, "MM-dd-yyyy").toFormat("MMMM dd, yyyy");
 			},
-			width: 30,
+			width: 35,
 		},
 		{
 			header: "Date of Discharge",
@@ -72,16 +75,88 @@ export const useTableSettings = () => {
 					? DateTime.fromFormat(item.datedischarged, "MM-dd-yyyy").toFormat("MMMM dd, yyyy")
 					: "NA";
 			},
-			width: 30,
+			width: 35,
 		},
 		{
 			header: "Remarks",
 			content: (item) => {
 				return item?.disposition ? `${item.disposition}` : "NA";
 			},
-			width: 40,
+			width: 25,
+		},
+		{
+			header: "Assessment",
+			content: (item) => item.assessment,
+			width: 25,
 		},
 	];
 
-	return { patientTableConfigs, consultationTableConfigs, admissionTableConfigs };
+	const generalConsultationTableConfigs = [
+		{
+			header: "Patient",
+			content: (item) => {
+				return `${item.firstname} ${item.lastname}`;
+			},
+			width: 30,
+		},
+		{
+			header: "Age",
+			content: (item) => {
+				const patient = _.find(patientData, (patient) => item.patient_id === patient._id);
+				return getDateDiff(item.dateofconsult, patient.birthday);
+			},
+			width: 20,
+		},
+		{
+			header: "Chief Complaint",
+			content: (item) => {
+				return item.chiefcomplaint;
+			},
+			width: 25,
+		},
+		{
+			header: "Assessment",
+			content: (item) => {
+				return item.assessment || "NA";
+			},
+			width: 25,
+		},
+	];
+
+	const generalAdmissionTableConfigs = [
+		{
+			header: "Patient",
+			content: (item) => {
+				return `${item.firstname} ${item.lastname}`;
+			},
+			width: 35,
+		},
+		{
+			header: "Date of Admission",
+			content: (item) => {
+				return DateTime.fromFormat(item.dateofconsult, "MM-dd-yyyy").toFormat("MMMM dd, yyyy");
+			},
+			width: 35,
+		},
+		{
+			header: "Remarks",
+			content: (item) => {
+				return item?.disposition ? `${item.disposition}` : "NA";
+			},
+			width: 25,
+		},
+		{
+			header: "Assessment",
+			content: (item) => item.assessment,
+			width: 25,
+		},
+	];
+
+	return {
+		patientTableConfigs,
+		consultationTableConfigs,
+		admissionTableConfigs,
+		generalConsultationTableConfigs,
+		generalAdmissionTableConfigs,
+	};
 };

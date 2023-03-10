@@ -1,7 +1,7 @@
 @use "styles/" as *;
 
 .container {
-	@include objSize(30rem, 20rem, 4px);
+	@include objSize(30rem, 20rem, 1rem);
 	@include displayFlex("flex", 0, column);
 	background-color: white;
 	padding: 1rem;

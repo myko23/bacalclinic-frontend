@@ -1,6 +1,7 @@
 import BottomMenu from "components/common/BottomMenu/BottomMenu";
 import Button from "components/common/Button/Button";
 import ConfirmModal from "components/common/ConfirmModal/ConfirmModal";
+import Header from "components/common/Header/Header";
 import InputBox from "components/common/InputBox/InputBox";
 import SelectBox from "components/common/SelectBox/SelectBox";
 import { searchTable } from "components/common/Table/searchTable";
@@ -9,7 +10,7 @@ import { useTableConfigs } from "components/common/Table/useTableConfigs";
 import { useDeletePatientMutation } from "lib/api/patientsAPI";
 import { sortPatientHeader } from "lib/configs/selectConfigs";
 import { useTableSettings } from "lib/configs/useTableSettings";
-import { useFetchQuery } from "lib/hooks/useFetchQuery";
+import { useRecords } from "lib/hooks/useRecords";
 import { useRoute } from "lib/hooks/useRoute";
 import { useSelected } from "lib/hooks/useSelected";
 import { sortFeatures } from "lib/models/sortFeatures";
@@ -19,7 +20,7 @@ import styles from "./PatientList.module.scss";
 
 const PatientList = () => {
 	const [patientSearch, setPatientSearch] = useState("");
-	const patientData = useFetchQuery(["patients"]);
+	const { patientData } = useRecords();
 	const { selectedPatient, setSelectedPatient } = useSelected();
 	const { setRecordsView } = useRoute();
 	const [confirmDelete, setConfirmDelete] = useState(false);
@@ -37,7 +38,7 @@ const PatientList = () => {
 	return (
 		<>
 			<div className={styles.container}>
-				<h1 className={styles.header}>Patients</h1>
+				<Header>Patient List</Header>
 				<div className={styles.sortContainer}>
 					<InputBox
 						label="Search"

@@ -6,13 +6,11 @@ import {
 } from "lib/store/reducers/selectedReducer";
 import _ from "lodash";
 import { useDispatch, useSelector } from "react-redux";
-import { useFetchQuery } from "./useFetchQuery";
 import { useRecords } from "./useRecords";
 
 export const useSelected = () => {
-	const patientData = useFetchQuery(["patients"]);
 	const { patientID, consultationID, admissionID } = useSelector(getSelectedState);
-	const { consultationData, admissionData } = useRecords();
+	const { consultationData, admissionData, patientData } = useRecords();
 	const dispatch = useDispatch();
 
 	const selectedPatient = _.find(patientData, (patient) => patient._id === patientID);
