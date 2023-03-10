@@ -56,6 +56,7 @@ const EditAdmission = () => {
 			);
 			formik.setFieldValue("disposition", selectedAdmission?.disposition);
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [dischargeCheck, selectedAdmission]);
 
 	const editAdmissionValues = getDiffObj(formik.values, selectedAdmission);

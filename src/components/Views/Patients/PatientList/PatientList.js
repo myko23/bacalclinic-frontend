@@ -1,3 +1,4 @@
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 import BottomMenu from "components/common/BottomMenu/BottomMenu";
 import Button from "components/common/Button/Button";
 import ConfirmModal from "components/common/ConfirmModal/ConfirmModal";
@@ -38,7 +39,7 @@ const PatientList = () => {
 	return (
 		<>
 			<div className={styles.container}>
-				<Header>Patient List</Header>
+				<Header icon={faUser}>Patient List</Header>
 				<div className={styles.sortContainer}>
 					<InputBox
 						label="Search"
