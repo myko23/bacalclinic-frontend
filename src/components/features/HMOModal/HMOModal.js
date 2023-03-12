@@ -9,6 +9,7 @@ import styles from "./HMOModal.module.scss";
 
 const HMOModal = ({ enabled = false, onCancel, formik }) => {
 	const { hmoData } = useHMO();
+
 	const [searchHMO, setSearchHMO] = useState("");
 
 	if (!enabled) return null;
@@ -17,6 +18,7 @@ const HMOModal = ({ enabled = false, onCancel, formik }) => {
 		if (item.toLowerCase().includes(searchHMO.toLowerCase())) return item;
 		return null;
 	});
+
 	const renderHMOData = () => {
 		return searchHMOData.map((item) => {
 			return (

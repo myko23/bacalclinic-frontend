@@ -4,8 +4,24 @@ import { useRecords } from "./useRecords";
 export const useHMO = () => {
 	const { recordsData } = useRecords();
 
-	let hmoData = _.map(_.uniqBy(recordsData, "hmo"), "hmo");
-	hmoData = hmoData.filter((item) => _.trim(item) !== "");
+	const hmoData = _.map(_.uniqBy(recordsData, "hmo"), "hmo");
 
-	return { hmoData };
+	const sortHMOFeatures = hmoData.map((item) => {
+		return { label: item, value: item };
+	});
+
+	const filterHMOData = (givenData) => {
+		const sortedHmoData = _.uniq(hmoData).map((foo) => {
+			const data = givenData.filter((bar) => foo === bar.hmo);
+
+			const total = data.reduce((sum, value) => sum + parseInt(value.bill), 0);
+
+			return { hmo: foo, data: data, total };
+		});
+
+		const existingHMOData = sortedHmoData.filter((data) => data.data.length !== 0);
+		return existingHMOData;
+	};
+
+	return { hmoData, sortHMOFeatures, filterHMOData };
 };

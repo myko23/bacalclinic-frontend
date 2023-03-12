@@ -20,12 +20,14 @@ import { useTableSettings } from "lib/hooks/useTableSettings";
 const ConsultationList = () => {
 	const { selectedPatient, patientConsultationData, selectedConsultation, setSelectedConsultation } = useSelected();
 	const { setRecordsView } = useRoute();
+	const { consultationTableConfigs } = useTableSettings();
+
+	const deleteConsultation = useDeleteRecordsMutation();
+
 	const [consultationSearch, setConsultationSearch] = useState("");
 	const [sortItem, setSortItem] = useState("");
 	const [sortOrder, setSortOrder] = useState("asc");
 	const [confirmDelete, setConfirmDelete] = useState(false);
-	const deleteConsultation = useDeleteRecordsMutation();
-	const { consultationTableConfigs } = useTableSettings();
 
 	const { tableData, tableHeaders, tableWidth } = useTableConfigs(patientConsultationData, consultationTableConfigs, {
 		defaultItem: "datecreated",

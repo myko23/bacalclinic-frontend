@@ -19,8 +19,10 @@ import { faNotesMedical } from "@fortawesome/free-solid-svg-icons";
 const EditConsultation = () => {
 	const { selectedPatient, selectedConsultation } = useSelected();
 	const { setRecordsView } = useRoute();
-	const [confirmEdit, setConfirmEdit] = useState(false);
+
 	const editConsultation = useEditRecordsMutation();
+
+	const [confirmEdit, setConfirmEdit] = useState(false);
 
 	const formik = useFormik({
 		enableReinitialize: true,

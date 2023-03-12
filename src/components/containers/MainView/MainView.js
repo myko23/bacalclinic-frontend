@@ -1,6 +1,7 @@
 import NavBar from "components/features/NavBar/NavBar";
 import { useRoute } from "lib/hooks/useRoute";
 import React from "react";
+import Billings from "../Billings/Billings";
 import GeneralAdmissionView from "../GeneralAdmission/GeneralAdmissionView/GeneralAdmissionView";
 import GeneralAdmitted from "../GeneralAdmitted/GeneralAdmitted";
 import GeneralConsultationView from "../GeneralConsultation/GeneralConsultationView/GeneralConsultationView";
@@ -20,6 +21,8 @@ const MainView = () => {
 				return <GeneralAdmissionView />;
 			case "generaladmitted":
 				return <GeneralAdmitted />;
+			case "billings":
+				return <Billings />;
 			default:
 				return <Records />;
 		}

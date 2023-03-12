@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const routeInitialState = {
+	login: false,
 	mainview: "records",
 	recordsview: "patientlist",
 	generalconsultationview: "days",
@@ -11,6 +12,9 @@ const slice = createSlice({
 	name: "route",
 	initialState: routeInitialState,
 	reducers: {
+		loginSet: (route, action) => {
+			route.login = action.payload;
+		},
 		mainViewSet: (route, action) => {
 			route.mainview = action.payload;
 		},
@@ -27,8 +31,11 @@ const slice = createSlice({
 });
 
 export default slice.reducer;
-const { mainViewSet, recordsViewSet, generalConsultationViewSet } = slice.actions;
+const { mainViewSet, recordsViewSet, generalConsultationViewSet, generalAdmissionViewSet, loginSet } = slice.actions;
 
+export const setLoginState = (dispatch) => (route) => {
+	dispatch(loginSet(route));
+};
 export const setMainViewState = (dispatch) => (route) => {
 	dispatch(mainViewSet(route));
 };
@@ -40,6 +47,6 @@ export const setGeneralConsultationViewState = (dispatch) => (route) => {
 	dispatch(generalConsultationViewSet(route));
 };
 export const setGeneralAdmissionViewState = (dispatch) => (route) => {
-	dispatch(generalConsultationViewSet(route));
+	dispatch(generalAdmissionViewSet(route));
 };
 export const getRouteState = (state) => state.route;

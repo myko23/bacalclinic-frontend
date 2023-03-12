@@ -16,10 +16,11 @@ import { checkArray } from "lib/utils/checkArray";
 import AssessmentModal from "components/features/AssessmentModal/AssessmentModal";
 
 const AdmissionForm = ({ formik, dischargeBox, editAdmissionValues, editFormat = false }) => {
-	const { dischargeCheck, setDischargeCheck } = dischargeBox;
 	const [hmoModal, setHmoModal] = useState(false);
 	const [duration, setDuration] = useState("0");
 	const [assessmentModal, setAssessmentModal] = useState(false);
+
+	const { dischargeCheck, setDischargeCheck } = dischargeBox;
 
 	useEffect(() => {
 		setDuration(`${getDateDiff(formik.values.datedischarged, formik.values.dateofconsult, "days")} days`);

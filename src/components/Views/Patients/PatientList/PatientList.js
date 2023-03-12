@@ -20,15 +20,17 @@ import { toast } from "react-toastify";
 import styles from "./PatientList.module.scss";
 
 const PatientList = () => {
-	const [patientSearch, setPatientSearch] = useState("");
 	const { patientData } = useRecords();
 	const { selectedPatient, setSelectedPatient } = useSelected();
 	const { setRecordsView } = useRoute();
+	const { patientTableConfigs } = useTableSettings();
+
+	const deletePatient = useDeletePatientMutation();
+
+	const [patientSearch, setPatientSearch] = useState("");
 	const [confirmDelete, setConfirmDelete] = useState(false);
 	const [sortOrder, setSortOrder] = useState("asc");
 	const [sortItem, setSortItem] = useState("lastname");
-	const deletePatient = useDeletePatientMutation();
-	const { patientTableConfigs } = useTableSettings();
 
 	const { tableData, tableHeaders, tableWidth } = useTableConfigs(patientData, patientTableConfigs, {
 		defaultItem: "datecreated",

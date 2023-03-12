@@ -17,7 +17,9 @@ import { useRoute } from "lib/hooks/useRoute";
 const EditPatient = () => {
 	const { selectedPatient } = useSelected();
 	const { setRecordsView } = useRoute();
+
 	const editPatient = useEditPatientMutation();
+
 	const [confirmDelete, setConfirmDelete] = useState(false);
 
 	const formik = useFormik({

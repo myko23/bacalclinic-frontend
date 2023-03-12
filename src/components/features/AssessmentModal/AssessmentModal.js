@@ -9,21 +9,24 @@ import { useAssessment } from "lib/hooks/useAssessment";
 
 const AssessmentModal = ({ enabled, onCancel, formik }) => {
 	const { assessmentData } = useAssessment();
+
 	const [searchAssessment, setSearchAssessment] = useState("");
+
 	if (!enabled) return null;
 
 	const searchAssessmentData = assessmentData.filter((item) => {
 		if (item.toLowerCase().includes(searchAssessment.toLowerCase())) return item;
 		return null;
 	});
+
 	const renderAssessment = () => {
-		return searchAssessmentData.map((item) => {
+		return searchAssessmentData.map((item, index) => {
 			return (
 				<div
-					key={item}
+					key={index}
 					className={styles.assessmentItem}
 					onClick={() => {
-						formik.setFieldValue("assessment", item);
+						formik.setFieldValue("assessment", `${formik.values.assessment},\n${item}`);
 					}}
 					onDoubleClick={onCancel}
 				>

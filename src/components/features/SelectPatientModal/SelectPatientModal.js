@@ -10,14 +10,16 @@ import Button from "components/common/Button/Button";
 
 const SelectPatientModal = ({ enabled, onCancel, onProceed }) => {
 	const { patientData } = useRecords();
+	const { selectedPatient, setSelectedPatient } = useSelected();
+
 	const [searchPatient, setSearchPatient] = useState("");
 
-	const { selectedPatient, setSelectedPatient } = useSelected();
+	if (!enabled) return null;
+
 	const searchPatientData = patientData.filter((item) => {
 		if (`${item.firstname} ${item.lastname}`.toLowerCase().includes(searchPatient.toLowerCase())) return item;
 		return null;
 	});
-	if (!enabled) return null;
 
 	const renderPatient = () => {
 		return searchPatientData.map((item) => {

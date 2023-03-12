@@ -25,18 +25,20 @@ import cls from "classnames";
 import { filterDataByMonthYear } from "lib/utils/filterDataByMonthYear";
 
 const GeneralConsultationMonth = () => {
-	const [consultationSearch, setConsultationSearch] = useState("");
 	const { nameConsultationData } = useRecords();
 	const { selectedConsultation, setSelectedConsultation, setSelectedPatient } = useSelected();
 	const { generalConsultationTableConfigs } = useTableSettings();
 	const { setMainView, setRecordsView, setGeneralConsultationView } = useRoute();
+
+	const deleteConsultation = useDeleteRecordsMutation();
+
+	const [consultationSearch, setConsultationSearch] = useState("");
 	const [sortItem, setSortItem] = useState("datecreated");
 	const [sortOrder, setSortOrder] = useState("asc");
 	const [confirmPatientModal, setConfirmPatientModal] = useState(false);
 	const [confirmDelete, setConfirmDelete] = useState(false);
 	const [sortMonth, setSortMonth] = useState(DateTime.now().month);
 	const [sortYear, setSortYear] = useState(DateTime.now().year);
-	const deleteConsultation = useDeleteRecordsMutation();
 
 	const viewButtonDisable = _.includes(
 		_.map(nameConsultationData, (item) => item._id),
@@ -55,7 +57,7 @@ const GeneralConsultationMonth = () => {
 		<>
 			<div className={styles.container}>
 				<div className={styles.headerContainer}>
-					<Header icon={faNotesMedical}>Monthly Consultations</Header>
+					<Header icon={faNotesMedical}>Monthly/Yearly Consultations</Header>
 					<div className={styles.navContainer}>
 						<div
 							className={styles.navItem}
@@ -118,7 +120,6 @@ const GeneralConsultationMonth = () => {
 						rowClick={(item) => {
 							setSelectedConsultation(item._id);
 							const consultation = _.find(nameConsultationData, (consult) => item._id === consult._id);
-							console.log({ consultation });
 							setSelectedPatient(consultation.patient_id);
 						}}
 						rowDoubleClick={() => {

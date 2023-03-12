@@ -1,4 +1,4 @@
-import { faNotesMedical } from "@fortawesome/free-solid-svg-icons";
+import { faBedPulse } from "@fortawesome/free-solid-svg-icons";
 import Header from "components/common/Header/Header";
 import React, { useState } from "react";
 import styles from "./GeneralAdmissionDay.module.scss";
@@ -25,19 +25,22 @@ import { toast } from "react-toastify";
 import SelectPatientModal from "components/features/SelectPatientModal/SelectPatientModal";
 
 const GeneralAdmissionDay = () => {
+	const { selectedAdmission, setSelectedAdmission } = useSelected();
+	const { setMainView, setRecordsView, setGeneralAdmissionView } = useRoute();
+	const { nameAdmissionData } = useRecords();
+	const { generalAdmissionTableConfigs } = useTableSettings();
+
+	const deleteAdmission = useDeleteRecordsMutation();
+
 	const [admissionSearch, setAdmissionSearch] = useState("");
 	const [sortDay, setSortDay] = useState(DateTime.now().toFormat("MM-dd-yyyy"));
 	const [sortItem, setSortItem] = useState("datecreated");
 	const [sortOrder, setSortOrder] = useState("asc");
-	const { selectedAdmission, setSelectedAdmission } = useSelected();
-	const { nameAdmissionData } = useRecords();
-	const { generalAdmissionTableConfigs } = useTableSettings();
-	const { setMainView, setRecordsView } = useRoute();
 	const [confirmDelete, setConfirmDelete] = useState(false);
-	const deleteAdmission = useDeleteRecordsMutation();
 	const [confirmPatientModal, setConfirmPatientModal] = useState(false);
 
 	const datedConsultationData = _.filter(nameAdmissionData, (item) => item.dateofconsult === sortDay);
+
 	const viewButtonDisable = _.includes(
 		_.map(datedConsultationData, (item) => item._id),
 		selectedAdmission?._id
@@ -56,10 +59,15 @@ const GeneralAdmissionDay = () => {
 		<>
 			<div className={styles.container}>
 				<div className={styles.headerContainer}>
-					<Header icon={faNotesMedical}>Daily Admissions</Header>
+					<Header icon={faBedPulse}>Daily Admissions</Header>
 					<div className={styles.navContainer}>
 						<div className={cls(styles.navItem, styles.navSelected)}>Days</div>
-						<div className={styles.navItem} onClick={() => {}}>
+						<div
+							className={styles.navItem}
+							onClick={() => {
+								setGeneralAdmissionView("months");
+							}}
+						>
 							Months
 						</div>
 					</div>

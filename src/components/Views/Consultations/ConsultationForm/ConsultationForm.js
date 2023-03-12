@@ -16,8 +16,9 @@ import HMOModal from "components/features/HMOModal/HMOModal";
 import AssessmentModal from "components/features/AssessmentModal/AssessmentModal";
 
 const ConsultationForm = ({ formik, editConsultationValues, editFormat = false }) => {
-	const [age, setAge] = useState("");
 	const { selectedPatient } = useSelected();
+
+	const [age, setAge] = useState("");
 	const [hmoModal, setHmoModal] = useState(false);
 	const [assessmentModal, setAssessmentModal] = useState(false);
 

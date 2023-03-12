@@ -18,6 +18,11 @@ export const useRecords = () => {
 		const { firstname, lastname, middlename } = newPatient;
 		return { ...consult, firstname, lastname, middlename };
 	});
+	const nameRecordsData = _.map(recordsData, (consult) => {
+		const newPatient = _.find(patientData, (foo) => foo._id === consult.patient_id);
+		const { firstname, lastname, middlename } = newPatient;
+		return { ...consult, firstname, lastname, middlename };
+	});
 
 	const admittedAdmissionData = nameAdmissionData.filter((item) => item?.datedischarged === "");
 
@@ -26,6 +31,7 @@ export const useRecords = () => {
 		admissionData,
 		patientData,
 		recordsData,
+		nameRecordsData,
 		nameConsultationData,
 		nameAdmissionData,
 		admittedAdmissionData,

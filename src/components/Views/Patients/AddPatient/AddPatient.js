@@ -16,9 +16,11 @@ import Header from "components/common/Header/Header";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 const AddPatient = () => {
-	const [confirmAdd, setConfirmAdd] = useState(false);
 	const { setRecordsView } = useRoute();
+
 	const addPatient = useAddPatientMutation();
+
+	const [confirmAdd, setConfirmAdd] = useState(false);
 
 	const formik = useFormik({
 		enableReinitialize: true,

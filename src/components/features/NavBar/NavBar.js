@@ -42,6 +42,14 @@ const NavBar = () => {
 				>
 					Admitted Patients
 				</p>
+				<p
+					className={cls(styles.navItem, mainview === "billings" && styles.navItemSelected)}
+					onClick={() => {
+						setMainView("billings");
+					}}
+				>
+					Billings
+				</p>
 			</div>
 		</div>
 	);

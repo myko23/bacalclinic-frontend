@@ -4,6 +4,7 @@ export const sortFeatures = [
 ];
 
 export const sortMonthsFeatures = [
+	{ label: "None", value: 0 },
 	{ label: "January", value: 1 },
 	{ label: "February", value: 2 },
 	{ label: "March", value: 3 },
@@ -16,4 +17,10 @@ export const sortMonthsFeatures = [
 	{ label: "October", value: 10 },
 	{ label: "November", value: 11 },
 	{ label: "December", value: 12 },
+];
+
+export const sortTypeFeatures = [
+	{ label: "All", value: "all" },
+	{ label: "Consultation", value: "consultation" },
+	{ label: "Admission", value: "admission" },
 ];

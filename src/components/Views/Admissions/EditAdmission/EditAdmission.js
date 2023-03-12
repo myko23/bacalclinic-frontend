@@ -19,10 +19,12 @@ import Header from "components/common/Header/Header";
 
 const EditAdmission = () => {
 	const { selectedPatient, selectedAdmission } = useSelected();
+	const { setRecordsView } = useRoute();
+
+	const editRecords = useEditRecordsMutation();
+
 	const [dischargeCheck, setDischargeCheck] = useState(false);
 	const [confirmEdit, setConfirmEdit] = useState(false);
-	const { setRecordsView } = useRoute();
-	const editRecords = useEditRecordsMutation();
 
 	useEffect(() => {
 		if (selectedAdmission.datedischarged !== "") setDischargeCheck(true);

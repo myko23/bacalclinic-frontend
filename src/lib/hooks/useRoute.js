@@ -1,15 +1,20 @@
 import {
 	getRouteState,
+	setGeneralAdmissionViewState,
 	setGeneralConsultationViewState,
+	setLoginState,
 	setMainViewState,
 	setRecordsViewState,
 } from "lib/store/reducers/routeReducer";
 import { useDispatch, useSelector } from "react-redux";
 
 export const useRoute = () => {
-	const { recordsview, mainview, generalconsultationview, generaladmissionview } = useSelector(getRouteState);
+	const { recordsview, mainview, generalconsultationview, generaladmissionview, login } = useSelector(getRouteState);
 	const dispatch = useDispatch();
 
+	const setLogin = (route) => {
+		setLoginState(dispatch)(route);
+	};
 	const setRecordsView = (route) => {
 		setRecordsViewState(dispatch)(route);
 	};
@@ -20,10 +25,11 @@ export const useRoute = () => {
 		setGeneralConsultationViewState(dispatch)(route);
 	};
 	const setGeneralAdmissionView = (route) => {
-		setGeneralConsultationViewState(dispatch)(route);
+		setGeneralAdmissionViewState(dispatch)(route);
 	};
 
 	return {
+		loginState: login,
 		recordsview,
 		mainview,
 		generalconsultationview,
@@ -32,5 +38,6 @@ export const useRoute = () => {
 		setMainView,
 		setGeneralConsultationView,
 		setGeneralAdmissionView,
+		setLogin,
 	};
 };

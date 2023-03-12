@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./SelectBox.module.scss";
 import cls from "classnames";
 
-const SelectBox = ({ label, className, options = [{ value: "hey", label: "hey" }], ...props }) => {
+const SelectBox = ({ label, className, options = [{ value: "hey", label: "hey" }], width = "15rem", ...props }) => {
 	const renderOptions = () => {
 		return options.map((option, index) => (
 			<option key={index} value={option.value}>
@@ -11,7 +11,7 @@ const SelectBox = ({ label, className, options = [{ value: "hey", label: "hey" }
 		));
 	};
 	return (
-		<div className={cls(styles.container, className)}>
+		<div className={cls(styles.container, className)} style={{ width }}>
 			<p className={styles.label}>{label}</p>
 			<select className={styles.select} {...props}>
 				{renderOptions()}

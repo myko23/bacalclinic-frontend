@@ -21,11 +21,13 @@ const AdmissionList = () => {
 	const { selectedPatient, selectedAdmission, setSelectedAdmission, patientAdmissionData } = useSelected();
 	const { setRecordsView } = useRoute();
 	const { admissionTableConfigs } = useTableSettings();
+
+	const deleteRecords = useDeleteRecordsMutation();
+
 	const [admissionSearch, setAdmissionSearch] = useState("");
 	const [sortItem, setSortItem] = useState("");
 	const [sortOrder, setSortOrder] = useState("asc");
 	const [confirmDelete, setConfirmDelete] = useState(false);
-	const deleteRecords = useDeleteRecordsMutation();
 
 	const { tableData, tableHeaders, tableWidth } = useTableConfigs(patientAdmissionData, admissionTableConfigs, {
 		defaultItem: "datecreated",

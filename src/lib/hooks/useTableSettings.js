@@ -24,25 +24,25 @@ export const useTableSettings = () => {
 		{
 			header: "Birthday",
 			content: (item) => {
-				return DateTime.fromFormat(item.birthday, "MM-dd-yyyy").toFormat("MMM dd, yyyy");
+				return DateTime.fromFormat(item.birthday, "MM-dd-yyyy").toFormat("MM/dd/yy");
 			},
-			width: 20,
+			width: 30,
 		},
 	];
 	const consultationTableConfigs = [
 		{
 			header: "Date of Consultation",
 			content: (item) => {
-				return DateTime.fromFormat(item.dateofconsult, "MM-dd-yyyy").toFormat("MMMM dd, yyyy");
+				return DateTime.fromFormat(item.dateofconsult, "MM-dd-yyyy").toFormat("MM/dd/yy");
 			},
-			width: 30,
+			width: 15,
 		},
 		{
 			header: "Age",
 			content: (item) => {
 				return getDateDiff(item.dateofconsult, selectedPatient?.birthday);
 			},
-			width: 20,
+			width: 5,
 		},
 		{
 			header: "Chief Complaint",
@@ -64,30 +64,30 @@ export const useTableSettings = () => {
 		{
 			header: "Date of Admission",
 			content: (item) => {
-				return DateTime.fromFormat(item.dateofconsult, "MM-dd-yyyy").toFormat("MMMM dd, yyyy");
+				return DateTime.fromFormat(item.dateofconsult, "MM-dd-yyyy").toFormat("MM/dd/yy");
 			},
-			width: 35,
+			width: 15,
 		},
 		{
 			header: "Date of Discharge",
 			content: (item) => {
 				return item?.datedischarged
-					? DateTime.fromFormat(item.datedischarged, "MM-dd-yyyy").toFormat("MMMM dd, yyyy")
+					? DateTime.fromFormat(item.datedischarged, "MM-dd-yyyy").toFormat("MM/dd/yy")
 					: "NA";
 			},
-			width: 35,
+			width: 15,
+		},
+		{
+			header: "Assessment",
+			content: (item) => item.assessment,
+			width: 50,
 		},
 		{
 			header: "Remarks",
 			content: (item) => {
 				return item?.disposition ? `${item.disposition}` : "NA";
 			},
-			width: 25,
-		},
-		{
-			header: "Assessment",
-			content: (item) => item.assessment,
-			width: 25,
+			width: 20,
 		},
 	];
 
@@ -129,26 +129,67 @@ export const useTableSettings = () => {
 			content: (item) => {
 				return `${item.firstname} ${item.lastname}`;
 			},
-			width: 35,
+			width: 20,
 		},
 		{
-			header: "Date of Admission",
+			header: "Admission",
 			content: (item) => {
-				return DateTime.fromFormat(item.dateofconsult, "MM-dd-yyyy").toFormat("MMMM dd, yyyy");
+				return DateTime.fromFormat(item.dateofconsult, "MM-dd-yyyy").toFormat("MM/dd/yy");
 			},
-			width: 35,
+			width: 10,
+		},
+		{
+			header: "Dishcarge",
+			content: (item) => {
+				return item.datedischarged
+					? DateTime.fromFormat(item.datedischarged, "MM-dd-yyyy").toFormat("MM/dd/yy")
+					: "NA";
+			},
+			width: 10,
+		},
+
+		{
+			header: "Assessment",
+			content: (item) => item.assessment,
+			width: 25,
 		},
 		{
 			header: "Remarks",
 			content: (item) => {
 				return item?.disposition ? `${item.disposition}` : "NA";
 			},
-			width: 25,
+			width: 15,
+		},
+	];
+
+	const hmoTableConfigs = [
+		{
+			header: "Patient",
+			content: (item) => {
+				return `${item.firstname} ${item.lastname}`;
+			},
+			width: 40,
 		},
 		{
-			header: "Assessment",
-			content: (item) => item.assessment,
-			width: 25,
+			header: "Type",
+			content: (item) => {
+				return _.capitalize(item.type);
+			},
+			width: 20,
+		},
+		{
+			header: "Date",
+			content: (item) => {
+				return DateTime.fromFormat(item.dateofconsult, "MM-dd-yyyy").toFormat("MM/dd/yy");
+			},
+			width: 20,
+		},
+		{
+			header: "Bill",
+			content: (item) => {
+				return item.bill;
+			},
+			width: 20,
 		},
 	];
 
@@ -158,5 +199,6 @@ export const useTableSettings = () => {
 		admissionTableConfigs,
 		generalConsultationTableConfigs,
 		generalAdmissionTableConfigs,
+		hmoTableConfigs,
 	};
 };

@@ -5,10 +5,10 @@ import GeneralAdmissionMonth from "../GeneralAdmissionMonth/GeneralAdmissionMont
 import styles from "./GeneralAdmissionView.module.scss";
 
 const GeneralAdmissionView = () => {
-	const { generalconsultationview } = useRoute();
+	const { generaladmissionview } = useRoute();
 
 	const renderGeneralAdmissions = () => {
-		switch (generalconsultationview) {
+		switch (generaladmissionview) {
 			case "days":
 				return <GeneralAdmissionDay />;
 			case "months":

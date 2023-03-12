@@ -1,0 +1,66 @@
+@use "styles/" as *;
+
+.container {
+	@include fitBox();
+	padding: 1rem 4rem;
+	padding-bottom: 5rem;
+
+	.headerContainer {
+		@include displayFlex();
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.sortContainer {
+		@include displayFlex("flex", 1rem);
+		justify-content: space-between;
+		align-items: center;
+		padding: 1rem 0;
+		border-bottom: 1px solid $grey;
+	}
+	.tableContainer {
+		@include displayFlex("flex", 1rem, column);
+		padding-top: 1rem;
+		.tableSetContainer {
+			border-bottom: 1px solid $grey;
+			padding-bottom: 1rem;
+			.hmoHeaderContainer {
+				width: 100%;
+				@include displayFlex();
+				align-items: center;
+				justify-content: space-between;
+
+				.hmo {
+					font-size: 2rem;
+				}
+			}
+		}
+	}
+}
+
+.bottomContainer {
+	@include displayFlex();
+	align-items: center;
+	padding: 0 4rem;
+
+	.totalContainer {
+		@include displayFlex("flex", 1rem);
+
+		align-items: center;
+		.totalLabel {
+			font-size: 1rem;
+			font-weight: 700;
+		}
+		.total {
+			font-size: 2rem;
+		}
+	}
+
+	.buttonContainer {
+		@include displayFlex("flex", 1rem);
+		margin-left: auto;
+		.button {
+			width: 10rem;
+		}
+	}
+}

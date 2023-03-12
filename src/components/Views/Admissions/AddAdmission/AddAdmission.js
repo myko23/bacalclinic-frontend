@@ -18,10 +18,12 @@ import { faBedPulse } from "@fortawesome/free-solid-svg-icons";
 
 const AddAdmission = () => {
 	const { selectedPatient } = useSelected();
+	const { setRecordsView } = useRoute();
+
+	const addRecords = useAddRecordsMutation();
+
 	const [dischargeCheck, setDischargeCheck] = useState(false);
 	const [confirmAdd, setConfirmAdd] = useState(false);
-	const { setRecordsView } = useRoute();
-	const addRecords = useAddRecordsMutation();
 
 	const formik = useFormik({
 		enableReinitialize: true,

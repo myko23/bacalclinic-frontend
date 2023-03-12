@@ -25,19 +25,22 @@ import styles from "./GeneralConsultationDay.module.scss";
 import cls from "classnames";
 
 const GeneralConsultationDay = () => {
-	const [consultationSearch, setConsultationSearch] = useState("");
 	const { nameConsultationData } = useRecords();
 	const { selectedConsultation, setSelectedConsultation, setSelectedPatient } = useSelected();
 	const { generalConsultationTableConfigs } = useTableSettings();
-	const [sortDay, setSortDay] = useState(DateTime.now().toFormat("MM-dd-yyyy"));
 	const { setMainView, setRecordsView, setGeneralConsultationView } = useRoute();
+
+	const deleteConsultation = useDeleteRecordsMutation();
+
+	const [consultationSearch, setConsultationSearch] = useState("");
+	const [sortDay, setSortDay] = useState(DateTime.now().toFormat("MM-dd-yyyy"));
 	const [sortItem, setSortItem] = useState("datecreated");
 	const [sortOrder, setSortOrder] = useState("asc");
 	const [confirmPatientModal, setConfirmPatientModal] = useState(false);
 	const [confirmDelete, setConfirmDelete] = useState(false);
-	const deleteConsultation = useDeleteRecordsMutation();
 
 	const datedConsultationData = _.filter(nameConsultationData, (item) => item.dateofconsult === sortDay);
+
 	const viewButtonDisable = _.includes(
 		_.map(datedConsultationData, (item) => item._id),
 		selectedConsultation?._id
@@ -114,7 +117,6 @@ const GeneralConsultationDay = () => {
 						rowClick={(item) => {
 							setSelectedConsultation(item._id);
 							const consultation = _.find(nameConsultationData, (consult) => item._id === consult._id);
-							console.log({ consultation });
 							setSelectedPatient(consultation.patient_id);
 						}}
 						rowDoubleClick={() => {
