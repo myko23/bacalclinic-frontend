@@ -36,6 +36,7 @@ const EditConsultation = () => {
 			assessment: selectedConsultation.assessment,
 			hmo: selectedConsultation.hmo,
 			bill: selectedConsultation.bill,
+			paid: selectedConsultation.paid,
 		},
 		validateOnBlur: false,
 		validateOnChange: false,

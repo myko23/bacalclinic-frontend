@@ -11,9 +11,14 @@
 			@include displayFlex("flex", 1rem, column);
 			width: 100%;
 		}
-
-		.loginBtn {
+		.buttonContainer {
 			width: 100%;
+			.credentials {
+				text-align: center;
+			}
+			.loginBtn {
+				width: 100%;
+			}
 		}
 	}
 }

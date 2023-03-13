@@ -1,0 +1,14 @@
+@use "styles/" as *;
+
+.container {
+	@include objSize(40rem, 70rem, 1rem);
+	@include displayFlex("center");
+
+	background-color: white;
+	padding: 2rem;
+
+	.pdfViewer {
+		@include objSize(100%, 90%);
+		margin: 1rem;
+	}
+}

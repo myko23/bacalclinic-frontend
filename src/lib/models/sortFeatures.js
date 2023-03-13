@@ -24,3 +24,9 @@ export const sortTypeFeatures = [
 	{ label: "Consultation", value: "consultation" },
 	{ label: "Admission", value: "admission" },
 ];
+
+export const sortPaidFeatures = [
+	{ label: "All", value: "all" },
+	{ label: "Paid", value: "paid" },
+	{ label: "Unpaid", value: "unpaid" },
+];

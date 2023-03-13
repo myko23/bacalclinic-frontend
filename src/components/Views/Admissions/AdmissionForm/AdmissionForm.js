@@ -48,7 +48,7 @@ const AdmissionForm = ({ formik, dischargeBox, editAdmissionValues, editFormat =
 							<CheckBox
 								label="Discharge"
 								active={dischargeCheck}
-								setActive={setDischargeCheck}
+								setActive={() => setDischargeCheck(!dischargeCheck)}
 								className={styles.dischargeCheckBox}
 							/>
 						</FormRow>
@@ -162,6 +162,14 @@ const AdmissionForm = ({ formik, dischargeBox, editAdmissionValues, editFormat =
 								className={cls(
 									checkArray("bill", editAdmissionValues) && editFormat && styles.editedInput
 								)}
+							/>
+							<CheckBox
+								label="Paid"
+								active={formik.values.paid}
+								setActive={() => {
+									formik.setFieldValue("paid", !formik.values.paid);
+								}}
+								className={styles.dischargeCheckBox}
 							/>
 						</FormRow>
 					</FormSection>

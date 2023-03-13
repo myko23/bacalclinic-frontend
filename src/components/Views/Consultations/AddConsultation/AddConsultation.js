@@ -36,6 +36,7 @@ const AddConsultation = () => {
 			assessment: "",
 			hmo: "",
 			bill: "300",
+			paid: true,
 		},
 		validateOnBlur: false,
 		validateOnChange: false,

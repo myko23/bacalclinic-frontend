@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./Billings.module.scss";
 import SelectBox from "components/common/SelectBox/SelectBox";
 import { useRecords } from "lib/hooks/useRecords";
-import { sortMonthsFeatures, sortTypeFeatures } from "lib/models/sortFeatures";
+import { sortMonthsFeatures, sortPaidFeatures, sortTypeFeatures } from "lib/models/sortFeatures";
 import { useHMO } from "lib/hooks/useHMO";
 import { DateTime } from "luxon";
 import { filterDataByMonthYear } from "lib/utils/filterDataByMonthYear";
@@ -16,6 +16,9 @@ import { searchTable } from "components/common/Table/searchTable";
 import Table from "components/common/Table/Table";
 import BottomMenu from "components/common/BottomMenu/BottomMenu";
 import { filterRecordsByType } from "lib/utils/filterRecordsByType";
+import Button from "components/common/Button/Button";
+import PrintBillings from "../PrintBillings/PrintBillings";
+import { filterPaid } from "lib/utils/filterPaid";
 
 const Billings = () => {
 	const { nameRecordsData } = useRecords();
@@ -28,8 +31,14 @@ const Billings = () => {
 	const [hmoSearch, setHMOSearch] = useState("");
 	const [total, setTotal] = useState(0);
 	const [typeData, setTypeData] = useState("all");
+	const [printModal, setPrintModal] = useState(false);
+	const [paid, setPaid] = useState("all");
 
-	const filterData = filterDataByMonthYear(filterRecordsByType(nameRecordsData, typeData), sortMonth, sortYear);
+	const filterData = filterDataByMonthYear(
+		filterRecordsByType(filterPaid(nameRecordsData, paid), typeData),
+		sortMonth,
+		sortYear
+	);
 
 	useEffect(() => {
 		if (sortHMO === "0") {
@@ -117,7 +126,7 @@ const Billings = () => {
 					<SelectBox
 						label="Month"
 						className={styles.sortMonth}
-						width="15rem"
+						width="10rem"
 						options={sortMonthsFeatures}
 						value={sortMonth}
 						onChange={(e) => setSortMonth(e.target.value)}
@@ -146,6 +155,14 @@ const Billings = () => {
 						value={sortHMO}
 						onChange={(e) => setSortHMO(e.target.value)}
 					/>
+					<SelectBox
+						label="Paid"
+						className={styles.sortPaid}
+						width="15rem"
+						options={sortPaidFeatures}
+						value={paid}
+						onChange={(e) => setPaid(e.target.value)}
+					/>
 				</div>
 				<div className={styles.tableContainer}>{renderHMOTable()}</div>
 			</div>
@@ -154,7 +171,20 @@ const Billings = () => {
 					<span className={styles.totalLabel}>Total</span>
 					<span className={styles.total}>{total}</span>
 				</div>
+				<div className={styles.buttonContainer}>
+					<Button
+						label="Print"
+						onClick={() => {
+							setPrintModal(true);
+						}}
+					/>
+				</div>
 			</BottomMenu>
+			<PrintBillings
+				enabled={printModal}
+				onCancel={() => setPrintModal(false)}
+				data={filterHMOData(filterData)}
+			/>
 		</>
 	);
 };

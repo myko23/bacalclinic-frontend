@@ -139,7 +139,7 @@ export const useTableSettings = () => {
 			width: 10,
 		},
 		{
-			header: "Dishcarge",
+			header: "Discharge",
 			content: (item) => {
 				return item.datedischarged
 					? DateTime.fromFormat(item.datedischarged, "MM-dd-yyyy").toFormat("MM/dd/yy")
@@ -188,6 +188,13 @@ export const useTableSettings = () => {
 			header: "Bill",
 			content: (item) => {
 				return item.bill;
+			},
+			width: 20,
+		},
+		{
+			header: "Paid",
+			content: (item) => {
+				return item.paid ? "Paid" : "Unpaid";
 			},
 			width: 20,
 		},

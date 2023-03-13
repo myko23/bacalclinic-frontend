@@ -40,6 +40,7 @@ const EditAdmission = () => {
 			assessment: selectedAdmission.assessment,
 			hmo: selectedAdmission.hmo,
 			bill: selectedAdmission.bill,
+			paid: selectedAdmission.paid,
 		},
 		validateOnBlur: false,
 		validateOnChange: false,

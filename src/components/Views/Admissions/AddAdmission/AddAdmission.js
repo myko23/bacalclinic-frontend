@@ -35,6 +35,7 @@ const AddAdmission = () => {
 			assessment: "",
 			hmo: "",
 			bill: "300",
+			paid: false,
 		},
 		validateOnBlur: false,
 		validateOnChange: false,
