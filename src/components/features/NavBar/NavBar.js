@@ -2,9 +2,15 @@ import { useRoute } from "lib/hooks/useRoute";
 import React from "react";
 import styles from "./NavBar.module.scss";
 import cls from "classnames";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import { useCookies } from "react-cookie";
 
 const NavBar = () => {
-	const { setRecordsView, setMainView, mainview } = useRoute();
+	const { setRecordsView, setMainView, mainview, setLogin } = useRoute();
+	// eslint-disable-next-line no-unused-vars
+	const [cookie, setCookies, removeCookies] = useCookies();
+
 	return (
 		<div className={styles.container}>
 			<h1 className={styles.header}>Dada Clinic</h1>
@@ -51,6 +57,14 @@ const NavBar = () => {
 					Billings
 				</p>
 			</div>
+			<FontAwesomeIcon
+				icon={faRightFromBracket}
+				className={styles.logout}
+				onClick={() => {
+					removeCookies("user");
+					setLogin(false);
+				}}
+			/>
 		</div>
 	);
 };

@@ -24,4 +24,13 @@
 			background-color: $grey;
 		}
 	}
+
+	.logout {
+		@include objSize(1.5rem, 1.5rem);
+		margin-left: auto;
+		cursor: pointer;
+		&:hover {
+			color: $grey;
+		}
+	}
 }

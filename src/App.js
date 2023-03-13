@@ -6,9 +6,12 @@ import { useEffect } from "react";
 import { useQuery } from "react-query";
 import { ToastContainer } from "react-toastify";
 import styles from "./App.module.scss";
+import { useCookies } from "react-cookie";
+import { cookieStatus } from "lib/configs/cookieConfigs";
 
 function App() {
 	const { loginState, setLogin } = useRoute();
+	const [cookie] = useCookies();
 
 	const connection = useQuery(["patients"], async () => {
 		const response = await API.get("/patients");
@@ -20,12 +23,13 @@ function App() {
 	});
 
 	useEffect(() => {
-		if (connection.isSuccess === false) {
+		if (connection.isSuccess && cookie.user === cookieStatus) {
+			setLogin(true);
+		} else {
 			setLogin(false);
 		}
-	}, [setLogin, connection.isSuccess]);
+	}, [setLogin, connection.isSuccess, cookie]);
 
-	// eslint-disable-next-line no-unused-vars
 	return (
 		<>
 			<div className={styles.container}>{loginState ? <MainView /> : <Login />}</div>
